@@ -1,0 +1,60 @@
+NESNE TABANLI PROGRAMLAMA DERSİ PROJE RAPORU
+Proje Adı: Oto Bakım Servisi Randevu ve Yönetim Sistemi
+Öğrenci Adı Soyadı: Eray Attila 
+Öğrenci Numarası: 243405019
+Ders Sorumlusu: Dr. Ümit Şentürk
+
+
+
+1. GİRİŞ VE PROJENİN AMACI
+Bu projenin temel amacı, bir oto bakım servisinde yürütülen iş süreçlerini (müşteri takibi, araç kaydı, randevu planlama ve servis yönetimi) dijital ortama taşıyan, Nesne Tabanlı Programlama (OOP) prensiplerine uygun bir masaüstü yazılımı geliştirmektir.
+Geliştirilen sistem sayesinde:
+•	Müşteriler: Kendi araçlarını sisteme kaydedebilir, servis hizmetlerini inceleyebilir ve servisin doluluk durumuna göre randevu alabilirler .
+•	Yöneticiler (Admin): Servis türlerini ve fiyatlarını güncelleyebilir, gelen randevu taleplerini onaylayabilir veya iptal edebilirler .
+Proje, kodun okunabilirliğini, bakımını ve geliştirilebilirliğini sağlamak amacıyla modüler bir yapıda tasarlanmıştır.
+
+2. KULLANILAN TEKNOLOJİLER VE ARAÇLAR
+Projenin geliştirilmesinde aşağıdaki teknolojiler kullanılmıştır:
+•	Programlama Dili: Java (JDK 1.8+).
+•	Arayüz Kütüphanesi: Java Swing (javax.swing).
+•	Veritabanı Yönetim Sistemi: MySQL.
+•	Veritabanı Bağlantısı: JDBC (Java Database Connectivity) .
+•	IDE: Eclipse 
+
+3. YAZILIM MİMARİSİ (PACKAGE STRUCTURE)
+Proje, Katmanlı Mimari yapısında kurgulanmış ve 5 ana pakete ayrılmıştır:
+1.	Model Paketi: Veritabanı tablolarının Java tarafındaki karşılıklarıdır (User, Car, Service, Appointment).
+2.	Dao (Data Access Object) Paketi: SQL sorgularının (INSERT, SELECT, UPDATE) bulunduğu katmandır. Örneğin; AppointmentDAO çakışma kontrolü yaparken , UserDAO giriş işlemlerini yönetir .
+3.	Service Paketi: İş mantığının (Business Logic) yürütüldüğü, GUI ve DAO arasında köprü görevi gören katmandır.
+4.	Gui Paketi: Kullanıcı etkileşimli grafik arayüzlerin (LoginFrame, CustomerFrame, AdminFrame) bulunduğu katmandır.
+5.	Util Paketi: Veritabanı bağlantı nesnesini yöneten DatabaseManager sınıfını içerir.
+
+
+4. NESNE TABANLI PROGRAMLAMA (OOP) KAVRAMLARI
+4.1. Kapsülleme (Encapsulation)
+Model sınıflarındaki değişkenler private tanımlanmış, erişim getter ve setter metotları ile kontrollü hale getirilmiştir .
+4.2. Kalıtım (Inheritance)
+Tüm pencere sınıfları, Swing özelliklerini kullanabilmek için JFrame sınıfından türetilmiştir.
+4.3. Çok Biçimlilik (Polymorphism)
+•	Tablo Hücreleri: Randevu durumuna göre yazı rengini değiştirmek için DefaultTableCellRenderer sınıfının getTableCellRendererComponent metodu "Override" edilmiştir .
+•	ToString Metodu: Car ve Service sınıflarında toString() metodu ezilerek ComboBox listelerinde anlamlı metinlerin görünmesi sağlanmıştır .
+4.4. Soyutlama (Abstraction)
+Arayüz katmanı SQL sorgularından izole edilmiştir. Örneğin; "Randevu Al" butonu sadece appointmentService.createAppointment() metodunu çağırır, arka plandaki karmaşık SQL işlemlerini bilmez .
+5. TEMEL ALGORİTMALAR VE İŞ MANTIĞI
+•	A. Otomatik Kapasite Kontrolü: Servisin aynı anda en fazla 3 araca hizmet verebileceği kuralı SQL ile denetlenir .
+•	B. Rol Tabanlı Yetkilendirme: Giriş yapan kullanıcının rolüne göre (ADMIN veya CUSTOMER) farklı panellere yönlendirme yapılır .
+•	C. Dinamik Veri Yönetimi: Randevular durumlarına göre renk kodlarıyla (Yeşil: Onaylı, Kırmızı: İptal, Turuncu: Beklemede) tabloda anlık olarak güncellenir .
+
+6. VERİTABANI TASARIMI
+Sistem aşağıdaki ilişkisel tablolardan oluşmaktadır:
+1.	user: Kullanıcı kimlik ve rol bilgileri (ADMIN/CUSTOMER).
+2.	car: user_id ile kullanıcıya bağlı araç bilgileri.
+3.	service: Hizmet adı, süresi ve fiyat bilgisi.
+4.	appointment: Tarih, saat ve durum bilgisi; diğer tüm tablolarla ilişkilidir.
+
+7. SONUÇ VE KAZANIMLAR
+Bu proje ile Java Swing ve MySQL entegrasyonu, katmanlı mimari kullanımı ve OOP prensiplerinin gerçek hayat senaryolarına uygulanması konusunda pratik deneyim kazanılmıştır. Sistem, modüler yapısı sayesinde yeni özellikler eklenmesine (raporlama, faturalandırma vb.) açık bir temel sunmaktadır.
+
+
+Github Linkim: https://github.com/erayAttila/OtoBak-mServisi/tree/main/OtoBakimServisi-main
+
